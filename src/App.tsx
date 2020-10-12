@@ -1,25 +1,44 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 function App() {
+
+  useEffect(()=>{
+
+    if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {      
+      document.getElementById('microfone')?.setAttribute("disabled","disabled");
+    }
+  });
 
   const commands = [
     { command: 'Limpar',
       callback: ({resetTranscript}:any) => resetTranscript()
     }
-  ];
+  ];  
   const { transcript } = useSpeechRecognition({commands});
 
   const [nome, setNome] = useState('');  
 
   function microfone(){  
 
-    if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-      // {document.getElementById('ref').value = 'Não existe';}
+    if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {      
       return null
     }
+
+    document.getElementById('microfone')!.style.animation = "pulse 2s infinite";
+    document.getElementById('microfone')!.style.borderRadius = "8px";
+    document.getElementById('microfone')?.classList.add("pulse");
+    document.getElementById('microfone')?.setAttribute("disabled","disabled");
   
     SpeechRecognition.startListening({language: 'pt-BR'});    
+
+    setTimeout(() => {
+      document.getElementById('microfone')!.style.animation = "";
+      document.getElementById('microfone')!.style.borderRadius = "";
+      document.getElementById('microfone')?.classList.remove("pulse");
+      document.getElementById('microfone')?.removeAttribute("disabled");
+    }, 5000);
+
           
   }
 
@@ -34,7 +53,7 @@ function App() {
         // value={(nome === '')? transcript: nome}
         value={nome}
         onChange={(e)=>{setNome(e.target.value)}}/>
-      <button style={{width:80, height:50, marginLeft:5}}         
+      <button id="microfone" style={{width:80, height:50, marginLeft:5, borderRadius:5}}         
         onClick={microfone} >Microfone</button>
       {/* <p>{transcript}</p> */}
     </div>
