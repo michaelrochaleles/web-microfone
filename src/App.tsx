@@ -3,17 +3,26 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 
 function App() {
 
-  useEffect(()=>{
+  useEffect(()=>{    
 
-    if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {      
+    if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {
       document.getElementById('microfone')?.setAttribute("disabled","disabled");
+    } else {
+      
+      if ( navigator.userAgent.indexOf('Chrome/') > 1 || navigator.userAgent.indexOf('samsung') > 1 ){
+        document.getElementById('microfone')?.setAttribute("enabled","enabled");                  
+      } else {        
+        document.getElementById('microfone')?.setAttribute("display","disabled");
+        document.getElementById('microfone')!.style.display = "none";
+      }
     }
+      
   },[]);
 
   const commands = [
     { command: 'Limpar',
       callback: ({resetTranscript}:any) => resetTranscript()
-    }    
+    }
   ];  
   const { transcript, listening } = useSpeechRecognition({commands});
 
@@ -46,8 +55,6 @@ function App() {
     // setNome("");
   
     SpeechRecognition.startListening({language: 'pt-br'});                
-
-    console.log('transcript',transcript);
 
     setTimeout(() => {
       document.getElementById('microfone')!.style.animation = "";
