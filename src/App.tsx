@@ -12,8 +12,9 @@ function App() {
       if ( navigator.userAgent.indexOf('Chrome/') > 1 || navigator.userAgent.indexOf('samsung') > 1 ){
         document.getElementById('microfone')?.setAttribute("enabled","enabled");                  
       } else {        
+        
         document.getElementById('microfone')?.setAttribute("display","disabled");
-        document.getElementById('microfone')!.style.display = "none";
+        document.getElementById('microfone')!.style.display = "none"; 
       }
     }
       
