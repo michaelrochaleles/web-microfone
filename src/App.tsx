@@ -10,6 +10,8 @@ function App() {
     } else {
       
       if ( navigator.userAgent.indexOf('Chrome/') > 1 || navigator.userAgent.indexOf('samsung') > 1 ){
+
+        document.write('entrou');
         document.getElementById('microfone')?.setAttribute("enabled","enabled");                  
       } else {        
         document.write('estou no safari');
