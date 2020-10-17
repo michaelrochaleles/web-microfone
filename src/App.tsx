@@ -6,8 +6,9 @@ function App() {
   useEffect(()=>{    
 
     if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {
+
       document.getElementById('microfone')?.setAttribute("disabled","disabled");
-      document.getElementById('microfone')!.style.display = "none"; 
+      document.getElementById('microfone')!.style.display = "none";       
     } else {
       
       document.getElementById('microfone')!.style.color = "red"; 
@@ -16,7 +17,7 @@ function App() {
         document.getElementById('microfone')?.setAttribute("enabled","enabled");                  
       } else {        
         
-        document.getElementById('microfone')?.setAttribute("display","disabled");
+        document.getElementById('microfone')?.setAttribute("disabled","disabled");
         document.getElementById('microfone')!.style.display = "none"; 
       }
     }
@@ -55,17 +56,15 @@ function App() {
     document.getElementById('microfone')!.style.borderRadius = "8px";
     document.getElementById('microfone')?.classList.add("pulse");
     document.getElementById('microfone')?.setAttribute("disabled","disabled");
-
-    // setNome("");
   
-    SpeechRecognition.startListening({language: 'pt-br'});                
+    SpeechRecognition.startListening({language: 'pt-br'});
 
-    setTimeout(() => {
-      document.getElementById('microfone')!.style.animation = "";
-      document.getElementById('microfone')!.style.borderRadius = "";
-      document.getElementById('microfone')?.classList.remove("pulse");
-      document.getElementById('microfone')?.removeAttribute("disabled");      
-    }, 5500);          
+    // setTimeout(() => {
+    //   document.getElementById('microfone')!.style.animation = "";
+    //   document.getElementById('microfone')!.style.borderRadius = "";
+    //   document.getElementById('microfone')?.classList.remove("pulse");
+    //   document.getElementById('microfone')?.removeAttribute("disabled");      
+    // }, 5500);          
   }
 
   return (
