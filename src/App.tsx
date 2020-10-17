@@ -7,14 +7,12 @@ function App() {
 
     if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {
       document.getElementById('microfone')?.setAttribute("disabled","disabled");
-      document.getElementById('microfone')!.style.color = "red"; 
+      document.getElementById('microfone')!.style.display = "none"; 
     } else {
       
       document.getElementById('microfone')!.style.color = "red"; 
 
-      if ( navigator.userAgent.indexOf('Chrome/') > 1 || navigator.userAgent.indexOf('samsung') > 1 ){
-
-        
+      if ( navigator.userAgent.indexOf('Chrome/') > 1 || navigator.userAgent.indexOf('samsung') > 1 ){        
         document.getElementById('microfone')?.setAttribute("enabled","enabled");                  
       } else {        
         
