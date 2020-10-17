@@ -7,6 +7,7 @@ function App() {
 
     if ( !SpeechRecognition.browserSupportsSpeechRecognition() ) {
       document.getElementById('microfone')?.setAttribute("disabled","disabled");
+      document.getElementById('microfone')!.style.color = "red"; 
     } else {
       
       document.getElementById('microfone')!.style.color = "red"; 
